@@ -1,6 +1,7 @@
 package SolverSpec
 
 import CountdownWordSpec._
+import CountdownWord._
 
 import org.scalatest.Matchers._
 import org.scalatest._
