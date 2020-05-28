@@ -3,9 +3,17 @@ package CountdownWordSpec
 import org.scalatest.Matchers._
 import org.scalatest._
 
-case class CountdownWord(words: Seq[String]){
+case class CountdownWord(words: Iterable[String]){
   def search(letters: String) = {
-    words.filter(word => CountdownWord.containsWord(letters, word))
+    val solutions = words.filter(word => CountdownWord.containsWord(letters.toLowerCase(), word))
+
+    if (solutions.nonEmpty){
+      (solutions
+        .groupBy(w=>w.length())
+        .maxBy{case (length, _) => length})._2
+    } else {
+      Seq.empty
+    }    
   }
 }
 
@@ -90,9 +98,14 @@ class CountdownWordSpec extends WordSpec {
   }
 
   "Given a list of real words" when {
-    val countdownWord = CountdownWord(Seq("apple", "appletree", "car"))
-    "there is a few matches" in {
-      countdownWord.search("appletreezzzz") shouldBe Seq("apple", "appletree")
+    "there is a few matches but one is longer" in {
+      val countdownWord = CountdownWord(Seq("apple", "appletree", "car"))
+      countdownWord.search("appletreezzzz") shouldBe Seq("appletree")
+    }
+
+    "there is a few matches the same size" in {
+      val countdownWord = CountdownWord(Seq("apple", "appel"))
+      countdownWord.search("appletreezzzz") shouldBe Seq("apple", "appel")
     }
   }
 }
