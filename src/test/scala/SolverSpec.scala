@@ -5,30 +5,24 @@ import CountdownWord._
 
 import org.scalatest.Matchers._
 import org.scalatest._
+import scala.io.Source
 
 class SolverSpec extends WordSpec {
-  "solve" in {
-   import scala.io.Source
 
-    val lines = Source.fromResource("english3.txt").getLines.toIterable
-    
-    val countdownWord = CountdownWord(lines.toSeq)
+  "solve" in {
+    val countdownWord = CountdownWord.defaultDictionary
 
     val solutions = countdownWord.search("ERCZUREIF")
 
-    solutions shouldBe(List("fiercer", "furzier"))
+    solutions.words shouldBe(List("fiercer", "furzier"))
     println(solutions)
   }
 
-  "solve2" in {
-   import scala.io.Source
+  "solve2" in {    
+    val countdownWord = CountdownWord.defaultDictionary
 
-    val lines = Source.fromResource("english3.txt").getLines.toIterable
+    val solutions = countdownWord.search("DEADBONER")
     
-    val countdownWord = CountdownWord(lines.toSeq)
-
-    val solutions = countdownWord.search("UAODKSLEU")
-
-    println(solutions)
+    println(solutions.formatted())
   }
 }

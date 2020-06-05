@@ -1,7 +1,7 @@
 package CountdownWord
 
 case class Word(text: String) {
-  lazy val length = text.length
+  val length = text.length
   val sortedLetters = text.sortBy(identity)
 
   def canBeMadeFrom(letters: String) = {
@@ -20,21 +20,44 @@ case class Word(text: String) {
   }
 }
 
+
+case class Solution(words: Seq[String]) {
+  def formatted() = {
+    val text = words
+      .map(word=>s"$word (${word.length})")
+      .mkString("\n")
+    text
+  }
+}
+
+object Solution {
+  val empty = Solution(Seq.empty)
+}
+
 case class CountdownWord(words: Seq[String]){
 
-  val words2 = words.map(Word.apply)
+  private val words2 = words.map(Word.apply)
 
-  def search(letters: String) : Seq[String] = {
+  def search(letters: String) : Solution = {
     val solutions = words2
       .filter(_.canBeMadeFrom(letters))
       .map(_.text)
 
-    if (solutions.nonEmpty){
-      (solutions
+    if (solutions.nonEmpty) {
+      Solution((solutions
         .groupBy(w=>w.length)
-        .maxBy{case (length, _) => length})._2
+        .maxBy{case (length, _) => length})._2)
     } else {
-      Seq.empty
-    }    
+      Solution.empty
+    }
   }
+}
+
+object CountdownWord {
+
+  import scala.io.Source
+
+  val lines = Source.fromResource("english3.txt").getLines.toIterable
+
+  lazy val defaultDictionary = CountdownWord(lines.toSeq)
 }

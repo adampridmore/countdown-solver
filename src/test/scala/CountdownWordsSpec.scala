@@ -35,11 +35,11 @@ class CountdownWordSpec extends WordSpec {
       val countdownWord = CountdownWord(Seq("a", "b", "c"))
 
     "there is not a match" in {
-      countdownWord.search("z") shouldBe Seq.empty
+      countdownWord.search("z") shouldBe Solution.empty
     }
     
     "there is a match" in {
-      countdownWord.search("a") shouldBe Seq("a")
+      countdownWord.search("a") shouldBe Solution(Seq("a"))
     }
   }
 
@@ -47,34 +47,34 @@ class CountdownWordSpec extends WordSpec {
       val countdownWord = CountdownWord(Seq("ab", "bc", "cd", "dc"))
 
     "there is not a match" in {
-      countdownWord.search("z") shouldBe Seq.empty
+      countdownWord.search("z") shouldBe Solution.empty
     }
     
     "there is a match" in {
-      countdownWord.search("ba") shouldBe Seq("ab")
+      countdownWord.search("ba") shouldBe Solution(Seq("ab"))
     }
 
     "there is multiple matches match" in {
-      countdownWord.search("cd") shouldBe Seq("cd", "dc")
+      countdownWord.search("cd") shouldBe Solution(Seq("cd", "dc"))
     }
   }
 
   "Given a list of multi letter words" when {
     val countdownWord = CountdownWord(Seq("ab"))
      "there is match on some letters" in {
-       countdownWord.search("abc") shouldBe Seq("ab")
+       countdownWord.search("abc") shouldBe Solution(Seq("ab"))
     }
   }
 
   "Given a list of real words" when {
     "there is a few matches but one is longer" in {
       val countdownWord = CountdownWord(Seq("apple", "appletree", "car"))
-      countdownWord.search("appletreezzzz") shouldBe Seq("appletree")
+      countdownWord.search("appletreezzzz") shouldBe Solution(Seq("appletree"))
     }
 
     "there is a few matches the same size" in {
       val countdownWord = CountdownWord(Seq("apple", "appel"))
-      countdownWord.search("appletreezzzz") shouldBe Seq("apple", "appel")
+      countdownWord.search("appletreezzzz") shouldBe Solution(Seq("apple", "appel"))
     }
   }
 }
