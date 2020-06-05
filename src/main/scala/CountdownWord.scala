@@ -2,6 +2,7 @@ package CountdownWord
 
 case class Word(text: String) {
   lazy val length = text.length
+  val sortedLetters = text.sortBy(identity)
 
   def canBeMadeFrom(letters: String) = {
      def f(letters: String, word: String) : Boolean = {
@@ -15,7 +16,7 @@ case class Word(text: String) {
       }
     }
 
-    f(letters.toLowerCase.sortBy(identity), text.sortBy(identity))
+    f(letters.toLowerCase.sortBy(identity), sortedLetters)
   }
 }
 

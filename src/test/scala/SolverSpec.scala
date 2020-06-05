@@ -17,6 +17,18 @@ class SolverSpec extends WordSpec {
     val solutions = countdownWord.search("ERCZUREIF")
 
     solutions shouldBe(List("fiercer", "furzier"))
-    println(countdownWord.search("ERCZUREIF"))
+    println(solutions)
+  }
+
+  "solve2" in {
+   import scala.io.Source
+
+    val lines = Source.fromResource("english3.txt").getLines.toIterable
+    
+    val countdownWord = CountdownWord(lines.toSeq)
+
+    val solutions = countdownWord.search("UAODKSLEU")
+
+    println(solutions)
   }
 }
