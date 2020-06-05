@@ -7,27 +7,27 @@ import CountdownWord._
 class CountdownWordSpec extends WordSpec {
   "isMatch" when {
     "abc does not containsWord def" in {
-      CountdownWord.containsWord("abc", "def") shouldBe false
+      Word("def").canBeMadeFrom("abc") shouldBe false
     }
 
     "a containsWord a" in {
-      CountdownWord.containsWord("ab", "ab") shouldBe true
+      Word("ab").canBeMadeFrom("ab") shouldBe true
     }
 
     "ab containsWord ab" in {
-      CountdownWord.containsWord("ab", "ab") shouldBe true
+      Word("ab").canBeMadeFrom("ab") shouldBe true
     }
 
     "dc containsWord cd" in {
-      CountdownWord.containsWord("dc", "cd") shouldBe true
+      Word("cd").canBeMadeFrom("dc") shouldBe true
     }
 
     "abcdef containsWord af" in {
-      CountdownWord.containsWord("abcdef", "af") shouldBe true
+      Word("af").canBeMadeFrom("abcdef") shouldBe true
     }
 
     "appletreezzzz containsWord apple" in {
-      CountdownWord.containsWord("appletreezzzz", "apple") shouldBe true
+      Word("apple").canBeMadeFrom("appletreezzzz") shouldBe true
     }
   }
 

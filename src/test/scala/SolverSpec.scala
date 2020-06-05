@@ -12,7 +12,7 @@ class SolverSpec extends WordSpec {
 
     val lines = Source.fromResource("english3.txt").getLines.toIterable
     
-    val countdownWord = CountdownWord(lines)
+    val countdownWord = CountdownWord(lines.toSeq)
 
     val solutions = countdownWord.search("ERCZUREIF")
 
