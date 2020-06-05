@@ -11,3 +11,8 @@ https://incoherency.co.uk/countdown/practice/
 sbt clean coverage test
 sbt coverageReport
 ```
+
+
+# Run
+
+sbt "run ABCDEFGHIJ"

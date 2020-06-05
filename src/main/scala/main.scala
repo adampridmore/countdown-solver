@@ -7,6 +7,8 @@ object Main extends App {
 
     val solutions = countdownWord.search(letters)
     
+    println("letters: " + letters)
+    println("matches:")
     println(solutions.formatted())
   }
 
