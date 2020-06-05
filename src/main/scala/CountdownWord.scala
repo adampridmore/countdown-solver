@@ -1,12 +1,21 @@
 package CountdownWord
 
+case class Word(text: String) {
+  lazy val length = text.length
+}
+
 case class CountdownWord(words: Iterable[String]){
-  def search(letters: String) = {
-    val solutions = words.filter(word => CountdownWord.containsWord(letters.toLowerCase(), word))
+
+  val words2 = words.map(Word.apply)
+
+  def search(letters: String) : Iterable[String] = {
+    val solutions = words2
+      .filter(word => CountdownWord.containsWord(letters.toLowerCase(), word.text))
+      .map(_.text)
 
     if (solutions.nonEmpty){
       (solutions
-        .groupBy(w=>w.length())
+        .groupBy(w=>w.length)
         .maxBy{case (length, _) => length})._2
     } else {
       Seq.empty
